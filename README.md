@@ -1,14 +1,18 @@
-A proxy server for npm to publish packages to a child/private registry
-and install packages from a child or parent/public registry (if the
-child doesn't have the package).
+A proxy server built on
+[node-http-proxy](https://github.com/nodejitsu/node-http-proxy) for
+npm to publish packages to a child/private registry and install
+packages from a child or parent/public registry (if the child doesn't
+have the package).
 
 ## Install
 
+Requires node version 0.6.6 or newer.
+
 ### Local
 
-1. Run (force install because [http-proxy](https://github.com/nodejitsu/node-http-proxy) doesn't support node 0.6.x):
+1. Run
 
-    npm install npm-proxy --force
+    npm install npm-proxy
 
 1. Run locally:
 
@@ -18,7 +22,7 @@ child doesn't have the package).
 
 1. Install npm-proxy globally
 
-    sudo npm install -g npm-proxy --force
+    sudo npm install -g npm-proxy
 
 1. Add the following line to the `os_daemons` section of
 `/etc/couchdb/local.ini` on the child npm registry:
