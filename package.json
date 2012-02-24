@@ -1,7 +1,7 @@
 { "author": "Greg G <gregg@aweber.com>"
 , "name": "npm-proxy"
 , "description": "A proxy server for npm to publish packages to a child/private registry and install packages from a child or parent/public registry (if the child doesn't have the package)."
-, "version": "0.0.2"
+, "version": "0.0.3"
 , "licenses": [{
     "type": "BSD",
     "url": "http://github.com/g-k/npm-proxy/raw/master/LICENSE"
@@ -18,6 +18,6 @@
       "coffee-script": ">= 1.1.0"
     , "commander": ">= 0.4.2"
     , "http-proxy": ">= 0.8.0"
-    , "restler": ">= 0.2.1"
+    , "restler": "0.2.x"
   }
 }
