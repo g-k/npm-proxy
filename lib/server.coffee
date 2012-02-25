@@ -14,8 +14,10 @@ targetParser = (target) ->
     host: host
     port: parseInt(port, 10) or 80
 
+package = JSON.parse fs.readFileSync require.resolve('../package.json'), 'utf8'
+
 program
-    .version('0.0.1')
+    .version(package.version)
     .option('-t, --target [localhost:8080]',
         'hostname and port to listen on', targetParser,
         { host: 'localhost', port:8080 })
