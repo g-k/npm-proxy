@@ -4,6 +4,8 @@ npm to publish packages to a child/private registry and install
 packages from a child or parent/public registry (if the child doesn't
 have the package).
 
+[![Build Status](https://secure.travis-ci.org/g-k/npm-proxy.png)](http://travis-ci.org/g-k/npm-proxy)
+
 ## Install
 
 Requires node version 0.6.6 or newer.
