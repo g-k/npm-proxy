@@ -77,6 +77,11 @@ server = httpProxy.createServer (req, res, proxy) ->
             proxyOpts['buffer'] = buffer
 
             proxy.proxyRequest req, res, proxyOpts
+
+      # check.on 'fail', (err) ->
+      #       console.error "ERROR: Failure to parse #{req.url}"
+      #       console.info "INFO: proxying to parent npm #{req.url}"
+
     else
         # Update our repo
         console.info "INFO: Updating #{req.url}"
