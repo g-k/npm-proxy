@@ -20,4 +20,8 @@
     , "http-proxy": ">= 0.8.0"
     , "restler": "0.2.x"
   }
+, "devDependencies": {
+      "mocha": "latest"
+    , "expect.js": "latest"
+  }
 }
