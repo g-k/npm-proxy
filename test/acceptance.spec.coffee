@@ -42,12 +42,36 @@ describe 'npm adduser', ->
       expect(result.type).to.be('user')
       done()
 
-describe 'npm publish <local package>', ->
-## Publish local package
 
-# npm publish .  --registry=$REGISTRY # run from project root
-# should have npm-proxy in local npm
-# curl -X $REGISTRY
+describe 'npm publish npm-proxy', ->
+
+  it 'should exit with code 0', (done) ->
+    # must run from project root
+    timeout = 3000
+    @timeout timeout
+
+    cmd = exec "npm publish -d . --force --registry=#{registry}",
+      cwd: process.cwd()
+      timeout: timeout,
+      (error, stdout, stderr) ->
+        log 'stdout: ' + stdout
+        log 'stderr: ' + stderr
+        if error != null
+          log 'exec error: ' + error
+
+    cmd.on 'exit', (code, signal) ->
+      log code, signal
+      expect(code).to.be(0)
+      done()
+
+  it 'should have package in registry', (done) ->
+    addPkg = restler.get "#{registry}", parser: restler.parsers.json
+
+    addPkg.on 'complete', (result, response) ->
+      log result, typeof result
+      expect(result).to.contain('npm-proxy')
+      done()
+
 
 ## Get non-local package
 
