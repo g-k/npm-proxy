@@ -18,6 +18,6 @@
       "coffee-script": ">= 1.1.0"
     , "commander": ">= 0.4.2"
     , "http-proxy": ">= 0.8.0"
-    , "restler": "0.2.x"
+    , "restler": "2.0.x"
   }
 }
