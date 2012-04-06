@@ -10,7 +10,7 @@ createNpmProxyServer = (options) ->
   child_npm = options.childRegistryTarget
 
   child_npm.check = (req) ->
-      url = "http://#{@host}:#{@port}" + req.url
+      url = "http://#{@host}:#{@port}#{@path}" + req.url
       console.log "#{req.method}:", url
       req.headers['host'] = "#{@host}:#{@port}"
       rest.get url, headers: req.headers
@@ -32,6 +32,7 @@ createNpmProxyServer = (options) ->
               console.log "INFO: Found #{req.url} in child npm!"
 
               req.headers['host'] = child_npm.host
+              req.url = child_npm.path + req.url
               proxyOpts = child_npm
               proxyOpts['buffer'] = buffer
 
@@ -45,6 +46,7 @@ createNpmProxyServer = (options) ->
               console.info "INFO: proxying to parent npm #{req.url}"
 
               req.headers['host'] = parent_npm.host
+              req.url = parent_npm.path + req.url
               proxyOpts = parent_npm
               proxyOpts['buffer'] = buffer
 
@@ -54,6 +56,7 @@ createNpmProxyServer = (options) ->
           console.info "INFO: Updating #{req.url}"
 
           req.headers['host'] = child_npm.host
+          req.url = child_npm.path + req.url
           proxyOpts = child_npm
           proxyOpts['buffer'] = buffer
 
