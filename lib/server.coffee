@@ -10,7 +10,7 @@ createNpmProxyServer = (options) ->
   child_npm = options.childRegistryTarget
 
   child_npm.check = (req) ->
-      url = "http://#{@host}:#{@port}#{@path}" + req.url
+      url = "#{@scheme}//#{@host}:#{@port}#{@path}" + req.url
       console.log "#{req.method}:", url
       req.headers['host'] = "#{@host}:#{@port}"
       rest.get url, headers: req.headers
