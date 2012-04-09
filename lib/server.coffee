@@ -2,6 +2,7 @@
 
 fs = require 'fs'
 http = require 'http'
+url = require 'url'
 
 program = require 'commander'
 httpProxy = require 'http-proxy'
@@ -10,12 +11,13 @@ rest = require 'restler'
 
 targetParser = (target) ->
     # Splits a target string into an object with host and port
-    p = /((.*):\/\/)?([^:/]+)(:(\d+))?((\/.*)*)/;
-    m = target.match p
-    scheme: m[2] or 'http'
-    host: m[3]
-    port: parseInt(m[5], 10) or 80
-    path: m[6] or ''
+    if not target.match /^.*:\/\// 
+        target = 'http://' + target
+    m = url.parse target
+    scheme: m.protocol or 'http:'
+    host: m.hostname
+    port: m.port or 80
+    path: m.pathname
 
 package = JSON.parse fs.readFileSync require.resolve('../package.json'), 'utf8'
 
@@ -39,7 +41,7 @@ child_npm = program.childRegistryTarget
 
 
 child_npm.check = (req) ->
-    url = "http://#{@host}:#{@port}#{@path}" + req.url
+    url = "#{@scheme}//#{@host}:#{@port}#{@path}" + req.url
     console.log "#{req.method}:", url
     req.headers['host'] = "#{@host}:#{@port}"
     rest.get url, headers: req.headers
