@@ -14,3 +14,6 @@ setup-npmjs:
 
 acceptance-test: # clean setup-couch start-couch setup-npmjs
 	REGISTRY='http://localhost:8080/registry/_design/app/_rewrite' ./test/acceptance.sh
+
+unit-test:
+	./node_modules/mocha/bin/mocha -u bdd --compilers coffee:coffee-script --bail --growl test/*.coffee
