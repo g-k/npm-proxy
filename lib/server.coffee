@@ -51,7 +51,7 @@ strip_url_for_npm_vhost = (url) ->
 server = httpProxy.createServer (req, res, proxy) ->
     buffer = httpProxy.buffer req
 
-    if req.method is 'GET'
+    if req.method is 'GET' #and '/-/user/' not in req.url
         # Check if the child npm has it
         check = child_npm.check req
 
