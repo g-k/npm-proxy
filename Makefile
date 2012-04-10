@@ -17,3 +17,5 @@ acceptance-test: # clean setup-couch start-couch setup-npmjs
 
 unit-test:
 	./node_modules/mocha/bin/mocha -u bdd --compilers coffee:coffee-script --bail --growl test/*.coffee
+
+test: unit-test acceptance-test
