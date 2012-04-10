@@ -47,6 +47,7 @@ describe 'npm publish npm-proxy', ->
 
   it 'should exit with code 0', (done) ->
     # must run from project root
+    # requires a adduser to have succeeded
     timeout = 3000
     @timeout timeout
 
@@ -76,10 +77,55 @@ describe 'npm publish npm-proxy', ->
 ## Get non-local package
 
 # npm install -d colors
-# should get from global npmjs
+# proxy should get from global npmjs
+# npmjs should fail if != registry.npmjs.org
+
+describe 'npm install npm-proxy', ->
+
+  it 'should exit with code 0', (done) ->
+    # must run from project root
+
+    # Set test and restler timeout
+    timeout = 10000
+    @timeout timeout
+
+    cmd = exec "npm install -d . --force --registry=#{registry}",
+      cwd: process.cwd()
+      timeout: timeout,
+      (error, stdout, stderr) ->
+        log 'stdout: ' + stdout
+        log 'stderr: ' + stderr
+        if error != null
+          log 'exec error: ' + error
+
+    cmd.on 'exit', (code, signal) ->
+      log code, signal
+      expect(code).to.be(0)
+      done()
+
+  it 'should have package in locally', (done) ->
+    checkForPkg = re
+    # addPkg = restler.get "#{registry}", parser: restler.parsers.json
+
+    # addPkg.on 'complete', (result, response) ->
+    #   log result, typeof result
+    #   expect(result).to.contain('npm-proxy')
+    #   done()
+
 
 ## Get local package
 
 # npm install -d npm-proxy --registry=$REGISTRY
 # Should pull npm-proxy from local couchdb
 # Should pull dependencies from 3rd party
+
+
+# More commands to test
+# npm owner
+# npm unpublish
+# npm deprecate
+# npm star
+# npm info
+# npm search
+# npm outdated
+# npm tag
