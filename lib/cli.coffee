@@ -4,12 +4,7 @@ fs = require 'fs'
 
 server = require './server'
 program = require 'commander'
-
-targetParser = (target) ->
-    # Splits a target string into an object with host and port
-    [host, port] = target.split ':'
-    host: host
-    port: parseInt(port, 10) or 80
+{ targetParser } = require './targetParser'
 
 
 npmPackage = JSON.parse fs.readFileSync require.resolve('../package.json'), 'utf8'
