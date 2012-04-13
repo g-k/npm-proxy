@@ -2,6 +2,7 @@
 
 fs = require 'fs'
 http = require 'http'
+url = require 'url'
 
 program = require 'commander'
 httpProxy = require 'http-proxy'
@@ -10,9 +11,13 @@ rest = require 'restler'
 
 targetParser = (target) ->
     # Splits a target string into an object with host and port
-    [host, port] = target.split ':'
-    host: host
-    port: parseInt(port, 10) or 80
+    if not target.match /^.*:\/\// 
+        target = 'http://' + target
+    m = url.parse target
+    scheme: m.protocol or 'http:'
+    host: m.hostname
+    port: m.port or 80
+    path: m.pathname
 
 npmPackage = JSON.parse fs.readFileSync require.resolve('../package.json'), 'utf8'
 
@@ -36,7 +41,7 @@ child_npm = program.childRegistryTarget
 
 
 child_npm.check = (req) ->
-    url = "http://#{@host}:#{@port}" + req.url
+    url = "#{@scheme}//#{@host}:#{@port}#{@path}" + req.url
     console.log "#{req.method}:", url
     req.headers['host'] = "#{@host}:#{@port}"
     rest.get url, headers: req.headers
@@ -60,6 +65,7 @@ server = httpProxy.createServer (req, res, proxy) ->
             console.log "INFO: Found #{req.url} in child npm!"
 
             req.headers['host'] = child_npm.host
+            req.url = child_npm.path + req.url
             proxyOpts = child_npm
             proxyOpts['buffer'] = buffer
 
@@ -73,6 +79,7 @@ server = httpProxy.createServer (req, res, proxy) ->
             console.info "INFO: proxying to parent npm #{req.url}"
 
             req.headers['host'] = parent_npm.host
+            req.url = parent_npm.path + req.url
             proxyOpts = parent_npm
             proxyOpts['buffer'] = buffer
 
@@ -82,6 +89,7 @@ server = httpProxy.createServer (req, res, proxy) ->
         console.info "INFO: Updating #{req.url}"
 
         req.headers['host'] = child_npm.host
+        req.url = child_npm.path + req.url
         proxyOpts = child_npm
         proxyOpts['buffer'] = buffer
 
