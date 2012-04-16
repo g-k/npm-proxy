@@ -1,5 +1,5 @@
 expect = require 'expect.js'
-{ targetParser, server } = require '../lib'
+{ targetParser, server } = require '..'
 
 
 describe 'targetParser', ->
