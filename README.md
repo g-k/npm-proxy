@@ -49,7 +49,7 @@ Requires node version 0.6.6 or newer.
 
       -h, --help                                            output usage information
       -V, --version                                         output the version number
-      -t, --target [localhost:8080]                         hostname and port to listen on
+      -t, --target [localhost:8080]                         hostname and port to listen on or url
       -c, --child-registry-target [localhost:5984]          NPM registry to push packages and pull from first
       -p, --parent-registry-target [registry.npmjs.org:80]  NPM registry to pull packages from if the child doesn't have it
 
