@@ -56,3 +56,29 @@ Requires node version 0.6.6 or newer.
 Once the proxy is running point npm to it using any of the methods
 from "Using the registry with the npm client" section of the
 [npmjs.org](http://github.com/isaacs/npmjs.org) project.
+
+
+### Development
+
+Janky OSX Testing on for my machine:
+
+```
+# brew install couchdb
+rm npm-shrinkwrap.json
+npm install -d . --registry=http://registry.npmjs.org/
+
+make clean setup-couch
+couchdb # start couch
+make setup-npmjs
+
+# start npm-proxy
+./bin/npm-proxy -c localhost:5984
+make acceptance test
+```
+
+#### TODO
+
+* ANSI colors for log output
+* 100% unit test coverage
+* For acceptance tests, setup and teardown multiple processes using node
+* For integration tests, record and playback npm requests and npmjs.org responses
