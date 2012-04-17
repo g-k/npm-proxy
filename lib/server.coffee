@@ -29,10 +29,10 @@ createNpmProxyServer = (options) ->
 
           # Found it in our repo
           check.on 'success', (data) ->
-              console.log "INFO: Found #{req.url} in child npm!"
+              req.url = child_npm.path + req.url
+              console.info "INFO: Found #{req.url} in child npm!"
 
               req.headers['host'] = child_npm.host
-              req.url = child_npm.path + req.url
               proxyOpts = child_npm
               proxyOpts['buffer'] = buffer
 
@@ -43,20 +43,20 @@ createNpmProxyServer = (options) ->
 
               req.url = strip_url_for_npm_vhost req.url
 
+              req.url = parent_npm.path + req.url
               console.info "INFO: proxying to parent npm #{req.url}"
 
               req.headers['host'] = parent_npm.host
-              req.url = parent_npm.path + req.url
               proxyOpts = parent_npm
               proxyOpts['buffer'] = buffer
 
               proxy.proxyRequest req, res, proxyOpts
       else
           # Update our repo
+          req.url = child_npm.path + req.url
           console.info "INFO: Updating #{req.url}"
 
           req.headers['host'] = child_npm.host
-          req.url = child_npm.path + req.url
           proxyOpts = child_npm
           proxyOpts['buffer'] = buffer
 
