@@ -10,4 +10,4 @@ module.exports =
     scheme: m.protocol or 'http:'
     host: m.hostname
     port: m.port or 80
-    path: m.pathname
+    path: m.pathname or ''
