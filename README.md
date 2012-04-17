@@ -14,22 +14,30 @@ Requires node version 0.6.6 or newer.
 
 1. Run
 
+```
     npm install npm-proxy
+```
 
 1. Run locally:
 
+```
 	./bin/npm-proxy --child-registry-target http://mysecret.npmjs.org:5984
+```
 
 ### As a couchdb os process deamon on the child npm registry:
 
 1. Install npm-proxy globally
 
+```
     sudo npm install -g npm-proxy
+```
 
 1. Add the following line to the `os_daemons` section of
 `/etc/couchdb/local.ini` on the child npm registry:
 
+```
     npm_proxy = /usr/bin/npm-proxy --child-registry-target http://mysecret.npmjs.org:5984
+```
 
 1. Restart couchdb and make sure npm-proxy started with it
 
