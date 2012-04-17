@@ -8,7 +8,8 @@
 }]
 , "bin": { "npm-proxy": "./bin/npm-proxy" }
 , "scripts": {
-    "start": "./bin/npm-proxy"
+      "test": "./node_modules/mocha/bin/mocha -u bdd --compilers coffee:coffee-script test/*.coffee"
+    , "start": "./bin/npm-proxy"
 }
 , "repository": { "url": "http://github.com/g-k/npm-proxy/" }
 , "engines": {
