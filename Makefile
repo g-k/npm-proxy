@@ -16,7 +16,7 @@ setup-npmjs:
 	./test/setup-npmjs.sh
 
 acceptance-test: # clean setup-couch start-couch setup-npmjs
-	REGISTRY='http://localhost:8080/registry/_design/app/_rewrite' ./test/acceptance.sh
+	REGISTRY='http://localhost:8080/registry/_design/scratch/_rewrite' ./test/acceptance.sh
 
 unit-test-coverage:
 	rm -rf lib-cov
