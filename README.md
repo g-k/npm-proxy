@@ -6,9 +6,39 @@ have the package).
 
 [![Build Status](https://secure.travis-ci.org/g-k/npm-proxy.png)](http://travis-ci.org/g-k/npm-proxy)
 
+## Deprecation Warning
+
+We ran into a few issues updating our npm repo with newer npm and
+npmjs.org checkouts.
+
+Newer versions of npmjs.org have different
+[rewrite urls](https://github.com/isaacs/npmjs.org/issues/72) and
+require a
+[trailing slash](https://github.com/isaacs/npmjs.org/issues/70), but
+vhosts should fix these issues.
+
+Around the introduction of the npm-registry-client (version ~1.1.25),
+npm required couchdb auth credentials for package GET requests (for
+security reasons I think). We use different credentials for our public
+and private repos and couldn't naively proxy GET requests to the
+public npmjs.org anymore.
+
+@wyrdvans fixed these issues by setting up vhosts, replicating the
+npmjs.org registry and our private registry. This also improved
+performance on our network, reduced load on the public npmjs.org, made
+it easier to run security audits on our node dependencies, and removed
+the need to run this proxy.
+
+Hopefully we can support multiple npm repositories in npm itself
+instead of needing a fully replicated repo or an npm proxy:
+
+* https://github.com/isaacs/npm/issues/19
+* https://github.com/isaacs/npm/issues/100
+* https://github.com/isaacs/npm/issues/1401
+
 ## Install
 
-Requires node version 0.6.6 or newer.
+Requires node version 0.6.6 or newer. Untested on node 0.8.
 
 ### Local
 
