@@ -36,10 +36,6 @@ instead of needing a fully replicated repo or an npm proxy:
 * https://github.com/isaacs/npm/issues/100
 * https://github.com/isaacs/npm/issues/1401
 
-Also checkout mixu's npm server that doesn't use couchdb:
-
-https://github.com/mixu/npm_push
-
 ## Install
 
 Requires node version 0.6.6 or newer. Untested on node 0.8.
