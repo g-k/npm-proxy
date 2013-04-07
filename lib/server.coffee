@@ -18,7 +18,7 @@ createNpmProxyServer = (options) ->
   strip_url_for_npm_vhost = (url) ->
       # Strips the couchdb npmjs.org app from the URL
       # for NPM registries with the registry vhost set
-      url.replace 'registry/_design/app/_rewrite/', ''
+      url.replace '/registry/_design/scratch/_rewrite/', ''
 
   server = httpProxy.createServer (req, res, proxy) ->
       buffer = httpProxy.buffer req
