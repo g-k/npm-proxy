@@ -47,6 +47,7 @@ createNpmProxyServer = (options) ->
               console.info "INFO: proxying to parent npm #{req.url}"
 
               req.headers['host'] = parent_npm.host
+              delete req.headers['authorization']
               proxyOpts = parent_npm
               proxyOpts['buffer'] = buffer
 
