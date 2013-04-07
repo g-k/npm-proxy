@@ -106,6 +106,13 @@ make setup-npmjs
 make acceptance test
 ```
 
+### Contributors
+
+    38  Greg Guthe
+	 2  Sergey Mamyan
+	 2  d3m3vilurr
+	 1  g-k
+
 #### TODO
 
 * ANSI colors for log output
