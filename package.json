@@ -1,28 +1,35 @@
-{ "author": "Greg G <gregg@aweber.com>"
-, "name": "npm-proxy"
-, "description": "A proxy server for npm to publish packages to a child/private registry and install packages from a child or parent/public registry (if the child doesn't have the package)."
-, "version": "0.0.4"
-, "licenses": [{
-    "type": "BSD",
-    "url": "http://github.com/g-k/npm-proxy/raw/master/LICENSE"
-}]
-, "bin": { "npm-proxy": "./bin/npm-proxy" }
-, "scripts": {
-      "test": "./node_modules/mocha/bin/mocha -u bdd --compilers coffee:coffee-script test/*.coffee"
-    , "start": "./bin/npm-proxy"
-}
-, "repository": { "url": "http://github.com/g-k/npm-proxy/" }
-, "engines": {
+{
+  "author": "Greg G <gregg@aweber.com>",
+  "name": "npm-proxy",
+  "description": "A proxy server for npm to publish packages to a child/private registry and install packages from a child or parent/public registry (if the child doesn't have the package).",
+  "version": "0.0.5",
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "http://github.com/g-k/npm-proxy/raw/master/LICENSE"
+    }
+  ],
+  "bin": {
+    "npm-proxy": "./bin/npm-proxy"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -u bdd --compilers coffee:coffee-script test/*.coffee",
+    "start": "./bin/npm-proxy"
+  },
+  "repository": {
+    "url": "http://github.com/g-k/npm-proxy/"
+  },
+  "engines": {
     "node": ">= 0.6.6"
-}
-, "dependencies": {
-      "coffee-script": ">= 1.1.0"
-    , "commander": ">= 0.4.2"
-    , "http-proxy": ">= 0.8.0"
-    , "restler": "0.2.x"
-  }
-, "devDependencies": {
-      "mocha": "latest"
-    , "expect.js": "latest"
+  },
+  "dependencies": {
+    "coffee-script": ">= 1.1.0",
+    "commander": ">= 0.4.2",
+    "http-proxy": ">= 0.8.0",
+    "restler": "0.2.x"
+  },
+  "devDependencies": {
+    "mocha": "~1.9.0",
+    "expect.js": "~0.2.0"
   }
 }
