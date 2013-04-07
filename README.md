@@ -115,6 +115,7 @@ make acceptance test
 
 #### TODO
 
+* Use [npm-registry-client](https://github.com/isaacs/npm-registry-client) if appropriate
 * ANSI colors for log output
 * 100% unit test coverage
 * For acceptance tests, setup and teardown multiple processes using node
